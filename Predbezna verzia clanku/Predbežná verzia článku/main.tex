@@ -1,0 +1,146 @@
+\documentclass[10pt,slovak,a4paper]{article}
+
+\usepackage[slovak]{babel}
+%\usepackage[T1]{fontenc}
+\usepackage[IL2]{fontenc} % lepšia sadzba písmena Ľ než v T1
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{url} % príkaz \url na formátovanie URL
+\usepackage{hyperref} % odkazy v texte budú aktívne (pri niektorých triedach dokumentov spôsobuje posun textu)
+\usepackage{cite}
+%\usepackage{times}
+
+\pagestyle{plain}
+%\pagestyle{headings}
+
+\title{Vyhľadávacie systémy využívajúce sémantické vyhľadávanie\thanks{Semestrálny projekt v predmete Metódy inžinierskej práce, ak. rok 2023/24, vedenie: Richard Marko}} % meno a priezvisko vyučujúceho na cvičeniach
+
+\author{Martin Farkaš\\[2pt]
+	{\small Slovenská technická univerzita v Bratislave}\\
+	{\small Fakulta informatiky a informačných technológií}\\
+	{\small \texttt{xfarkasm2@stuba.sk}}
+	}
+
+\date{\small 30. september 2023} % upravte
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Pri vyhľadávaní rôznych informácii na internete sa často stretávame so stránkami alebo článkami, ktoré by sme pri tvorbe našich projektov, prác alebo prezentácii nevyužili a to z jednoduchého dôvodu - ich obsah často nesúvisí s pojmom, ktorý práve hľadáme. Sem vstupuje pojem relevantnosť a konkrétne a jej uplatnenie v oblasti tvorby kvalitných vedeckých článkov alebo aj bakalárkych prác. Relevantnosťou vyhľadávaných informácii a článkov na internete sa práve zaoberá semantické vyhľadávanie. Je to pojem, ktorý je každému tvorcovi článkov, ale aj študentovi vysokej či strednej školy známy. O to zaujímavejšie sú systémy, ktoré využívajú sémantické vyhľadávanie, pretože každý z nich môže pracovať na inom princípe a výsledok niektorých z nich môže byť, čo sa relevantnosti týka, presnejší.
+
+%Preto tento článok bude zameraný skôr na systémy alebo stránky, ktorý tento spôsob vyhľadávania používajú. 
+%\ldots
+\end{abstract}
+
+
+\section{Úvod}
+Počas toho ako sa Internet postupne vyvíjal bolo čoraz ľahšie sa dostať k informáciám, ktoré sme potrebovali. V dnešnej dobe sme zahltení toľkým množstvom informácií, kde množstvo z nich je aj nepravdivých, že na vypracovanie nášho projektu by sme museli prehľadávať niekoľko desiatok stránok a zároveň kontrolovať či je daný zdroj overený. Samozrejme, na internete existuje množstvo stránok, ktoré nám poskytnú články z overených zdrojov, avšak ich obsah je často mimo tému/problém, ktorý riešime. Pri hľadaní relevantných článkov nám pomáhajú vyhľadávacie systémy, ktoré pracujú na princípe sémantického vyhľadávania. 
+
+Tento článok sa bude preto zaoberať:
+\begin{itemize}
+    \item Stručným vysvetlením pojmu sémantické vyhľadávanie ~\ref{sems}
+    \item Rozdiel medzi klasickým vyhľadávaním a sémantickým vyhľadávaním ~\ref{porovnanie}
+    \item Konkrétnymi systémami a ich funkciami ~\ref{sys}
+    \item Systémom založeným na báze umelej inteligencie - "Semantic Scholar"
+\end{itemize}
+
+%Motivujte čitateľa a vysvetlite, o čom píšete.Úvod sa väčšinou nedelí na časti.
+
+%Uveďte explicitne štruktúru článku. Tu je nejaký príklad.
+%Základný problém, ktorý bol naznačený v úvode, je podrobnejšie vysvetlený v časti~\ref{nejaka}.
+%Dôležité súvislosti sú uvedené v častiach~\ref{dolezita} a~\ref{dolezitejsia}.
+%Záverečné poznámky prináša časť~\ref{zaver}.
+
+
+
+\section{Pojem semantické vyhľadávanie} \label{sems}
+Aby sme mohli pokračovať v tomto článku, musia byť všetci čitatelia oboznámený s pojmom sémantické vyhľadávanie. Začnime pojmom sémantika."Sémantika sa sústreďuje najmä na skúmanie vzťahov medzi jazykovými výrazmi a predmetmi, na ktoré sa tieto výrazy vzťahujú a na tie vlastnosti a vzťahy výrazov, ktoré súvisia a ich vzťahmi k týmto predmetom." ~\cite{CMO} S vynálezom prvých počítačov prišla aj myšlienka použiť sémantiku v počítačoch. Podľa ~\cite{ijrr} sa za priekopníka v tejto oblasti považuje Robert W. Floyd, ktorý vo svojej práci opísal využitie sémantiky v počítačoch. Jeho práca obsahovala dizajn algoritmov použitých na vyhľadanie najefektívnejšej cesty v sieti alebo aj triedenie informácii.  
+Z toho článok ~\cite{ijrr} vyvodil zámer, že sémantické vyhľadávanie, na rozdiel od typických vyhľadávacích algoritmov, je založený na kontexte vyhľadávanej frázy, zámere aj jej podstate. Využíva viacero algorimov a metód, ako napríklad "keyword-to-concept mapping" čo môžeme preložiť ako vytváranie pojmových máp na základe kľúčových slov.
+
+Princíp fungovania sémantického vyhľadávania je ukázaný na nasledovnom obrázku:
+
+\begin{figure*}[tbh]
+\centering
+\includegraphics[scale=2.5]{obrazok1.jpg}
+\caption{Proces semantického vyhľadávania ~\cite{ijrr} }
+\end{figure*}
+Ako je na obrázku vidieť, proces vyhľadávania rozdeľuje autor článku ~\cite{ijrr} na 5 častí. Prvým krokom je zadanie hľadaných slov. V ďalšom kroku sa tieto slova analyzujú a porovnávajú sa s "thesaurus" čo je kniha alebo lexikón so synonymami alebo slovami spolu súvisiacimi. V preposlednom kroku sa prístúpi k zhodným dátam a vyhľadávanie vyhodí vhodné výsledky v podobe stránok alebo článkov.
+Avšak článok ~\cite{swm} rozdeľuje činnosť až na 6 častí ako vidieť na obrázku č. 2. Prvá časť poskytuje zbieranie neštruktúrovaných (internetové stránky), polo-štruktúrovaných (dáta v XML a databáze) a štruktúrovaných dát, avšak neštruktúrované a polo-štruktúrované dáta musia byť pretranformované na štruktúrované. Tu vstupuje do funkcie druhá časť, ktorá transformuje tieto dáta podľa určitých techník/metód na spracovanie dát ako napríklad konverzia dát. Tretia časť sumarizuje výsledky pre problémy ktoré sa mohli vyskytnúť pri 2. časti ako napríklad prípad kedy rôzne zdroje môžu poskytovať rôzne a často doplnkové informácie k istým problémom. Ďalšími časťami sú rôzne mechanizmy a služby semantického vyhľadávania a na koniec prezentácia výsledkov
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[scale=0.75]{obrazok2.jpg}
+    \caption{O trochu zložitejšia štruktúra vyhľadávania ~\cite{swm}}
+\end{figure*}
+
+
+
+\section{Porovnanie s klasickým vyhľadávaním} \label{porovnanie}
+
+\section {Konkrétne vyhľadávacie systémy} \label{sys}
+V tejto časti by som sa chcel povenovať konkrétnym vyhľadávacím systémom, ktoré pracujú na báze sémantického vyhľadávania, ich funkciám.
+%pridať vysvetlenie semantických systémov a ich rozdelenie ~cite{ijs}
+\subsection{Hakia} 
+Prvým systémom je, ako je aj z názvu vidieť, Hakia. Autor článku ~\cite{sur} uvádza, že tento vyhľadávací systém bol vyvynutý jadrovým vedcom Riza Berkan a ekonómom Kouri v roku 2004. Taktiež uvádza, že sa Hakia zameriava skôr na význam slov a nie priamo na slová a slovné frázy. Článok ~\cite{ijrr} navyše uvádza, že tento systém vyzýval používateľa zadávať nielen slová, ale aj otázky, frázy alebo celé vety. Výsledky vyhľadávania  boli rozdelené do kategórii Web, Správy, Blogy, Videá a mohli sme si ich usporiadať podľa relevantnosti a dátumu. Oba články ~\cite{citerx} a ~\cite{ijrr} uvádzajú, že Hakia bola založená na troch technológiách. 
+Prvou bola OntoSem, ktorú autori článkov opisujú ako lingvistickú databázu kde sú slová sú klasifikované do rôznych "významov" ktoré vyjadrujú. Myslím si však, že technológiu OntoSem opisuje článok ~\cite{ontosem} najlepšie a to ako prostredenie spracovávajúce text, ktoré za vstup berie absolútny text (z anglického slova "unrestricted text") a na výstupe vynáša von jeho morfologickú, syntaktickú a sémantickú analýzu.
+%opýtať sa na anglické slová
+Druhá technológia s názvom QDEX (Query indexing technique), ako autori vyššie uvedených článkov píšu, mala za úlohu zozbierať všetky možné významy súvisiace s obsahom nášho vyhľadávania.
+Poslednou je algoritmus Semantic Rank, ktorý nezávisle zoraďoval výsledky vyhľadávania, čo používateľovi ušetril čas a ľahko identifikoval informácie z spoľahlivých stránok.
+Okrem toho mal systém Hakia aj plno iných funkcií ako uvádza napríklad autor článku ~\cite{sur}, kde uvádza, že Hakia presentoval niekoľko návrhov pred tým ako sme stlačili tlačidlo "Vyhľadať", zvýraznil slová alebo vety, ktoré dávali odpoveď na nami hľadaný problém a taktiež je v danom článku uvedené, že Hakia používal aplikáciu "Meet Others", ktorá umožňovala používateľom stretnúť sa a diskutovať o dôležitých problémoch.
+Na druhej strane má Hakia aj pár limitácii ako uvádza autor článku ~ \cite{ijs}. Medzi jeho nevýhody patrí napríklad fakt, že všetko neindexuje, potrebuje iné vyhľadávacie systémy na jeho funkciu.
+
+\begin{figure*}[h]
+    \centering
+    \includegraphics[scale =0.25]{hakiaobrázok.jpg}
+    \caption{Náhľad na používateľské prostredie Hakia ~\cite{hakiaobr}}
+\end{figure*}
+
+\subsection{Kngine} 
+Ďalším z radu systémom, ktoré využívajú sémantické vyhľadávanie patrí Kngine. Tento systém má toho veľa spoločného so sytémom Hakia ako uvádza autor článku ~\cite{ijrr} ako napríklad na vstupe môžeme zadávať otázky. Článok taktiež uvádza, že výsledky sú rozdelené na výsledky vyhľadávania na webe a na výsledky vyhľadávania medzi obrázkami.
+%obrázok z swm
+Okrem toho používa ako uvádza aj autor vyššie uvedeného článku, schopnosť sám sa učiť. To znamená, že sa neustále učí a rozvíja. Aktuálne obsahuje viac ako 8 miliónov konceptov a to je miesto kde podľa autora článku ~\cite{citerx} je jeho najváčšia sila. Okrem toho článok ~\cite{ijs} uvádza, že je multijazyčný a okrem toho umožňuje používateľovi vyhľadávať paralelne.
+%\subsection{Kosmix} 
+\subsection{Powerset}
+Ako autor článku ~\cite{ijrr} uvádza, v roku 2005 vznikla firma, ktorá škonštruovala daný vyhľadávací systém s myšlienkou spraviť vyhľadávanie ľahšie a viac intuitívne. Činnosť systému Powerset sa podľa daného článku sústreďuje iba na jedinú vec a to na spracovanie natívneho/prirodzeného jazyka aby rozumel podstate otázky alebo vyhľadávanej fráze. Taktiež článok ~\cite{citerx} uvádza, že všetky výsledky vyhľadávania pochádzajú zo stránky Wikipedia. 
+\subsection{Swoogle}
+Ďalším z tých populárnejších vyhľadávacích systémov je Swoogle. Autor článku ~\cite{ijs} píše, že Swoogle je založený na "crawlerovi". Swoogle využíva "crawlera" na objavovanie RDF a HTML dokumentov a následne extraktuje dáta a zhodnotí spojitosti medzi dokumentmi. Ak by sme nevedeli čo pojem "crawler znamená, článok ~\cite{crawler} nám to pekne vysvetlí . Opisuje ho ako program alebo softvér, ktorý prehliada internet systematickým a automatickým spôsobom. Taktiež autor článku píše, že sú používané v podstate na vytváranie replík navštívených stránok, ktoré sú neskôr spracované vyhľadávacím systémom, ktorý zaindexuje stiahnuté stránky ktoré pomôžu v rýchlom vyhľadávaní.  Článok ~\cite{ijs} ho opisuje aj ako vyhľadávací systém založený na obsahu, ktorý zvykol analyzovať, objavovať a indexovať vedomosti získané z internetu a okrem toho aj ako vyhľadávací systém založený na algoritme, ktorý hodnotí internetové stránky podľa rôznych kritérii a OWL jazyku. Taktiež autor daného článku píše o jeho limitáciách medzi ktoré patrí zlé indexovanie dokumenov a slabá doba odozvy pri hľadaní výrazov.
+\subsection{Sensebot}
+Jedným z posledných vyhľadávacích systémov je Sensebot. Ako autor článku ~\cite{ijrr} uvádza, Sensebot používa ťaženie textu (z anglického spojenia "text mining") na analýzu internetových stránok a rozpoznáva dôležité sémantické koncepcie. Potom vykonáva niekoľko dokumentový prehľad obsahu aby následne vygeneroval precízny súhrn výsledkov vyhľadávania. Autor článku ~\cite{sensebot} opisuje priebeh hľadania výsledkov o trochu inak. Keď používateľ zadá výraz na hľadanie, Sensebot bude najprv hľadať niekoľko stránok, ktoré sa zhodujú s hľadaným výrazom. Avšak predtým ako vráti používateľovi výsledky, urobí analýzu výsledkov pomocou už spomínaného "text miningu", ktorý autor opisuje ako technológiu vyhľadávajúcu kľúčové pojmy zahrnuté na stránkach. Následne je vykonávaná niekoľko dokumentová sumarizácia na vytvorenie súhrnu tém súvisiacim s používateľovým vstupom, ktorý je vrátený na výstupe. Ako vidieť, autori sa v hlavných koncepciách zhodujú. Autor druhého článku vysvetľuje danú problmatiku o trochu podrobnejšie.
+
+\subsection{DuckDuckGo}
+Posledným systémom využívajúci sémantické vyhľadávanie je DuckDuckGo. Najväčšou črtou tohto vyhľadávacieho systému je ochrana súkromia a osobných údajov. Ako majú uvedené aj na ich internetovej stránke \href{https://duckduckgo.com/}{duckduckgo.com} je to bezplatný webový prehliadač ktorý nesleduje ani našu históriu vyhľadávania, ani históriu prehliadania. Povedal by som, že to je jeden z najviac populárnych vyhľadávačoch po gigantoch ako Google, Yahoo alebo Bing. Okrem toho je plný iných funkcií. Autor článku ~\cite{citerx} uvádza funkciu, že ak hľadaný výraz alebo slovo má viac významov, DuckDuckgo mu dá možnosť zvoliť si daný význam slova, ktorý pôvodne hľadal.
+%\paragraph{Veľmi dôležitá poznámka.}
+%Niekedy je potrebné nadpisom označiť odsek. Text pokračuje hneď za nadpisom.
+
+
+
+\section{Semantic Scholar} \label{dolezita}
+
+
+
+
+\section{Ešte dôležitejšia časť} \label{dolezitejsia}
+
+
+
+
+\section{Záver} \label{zaver} % prípadne iný variant názvu
+
+
+
+%\acknowledgement{Ak niekomu chcete poďakovať\ldots}
+
+
+% týmto sa generuje zoznam literatúry z obsahu súboru literatura.bib podľa toho, na čo sa v článku odkazujete
+\bibliography{bibliography.bib}
+% ....nĂˇzov sĂşboru je: literatura.bib
+% kniha
+
+\bibliographystyle{alpha} % prípadne alpha, abbrv alebo hociktorý iný
+\end{document}
+
+%obrázky z researchgate
